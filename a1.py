@@ -63,7 +63,18 @@ def every_other(lst: List[T]) -> List[T]:
     Returns:
         a list of every of other item in the original list starting with the first
     """
-    raise NotImplementedError("every_other")
+    # return lst[::2] - pythonic way
+    # Java Way #1
+    # new_lst = []
+    # for i in range(len(lst)):
+    #     if i % 2 == 0:
+    #         new_lst.append(lst[i])
+    # return new_lst
+    new_lst = []
+    for i in range(0,len(lst),2):
+        new_lst.append(lst[i])
+    return new_lst
+
 
 
 def sum_list(lst: List[int]) -> int:
@@ -76,7 +87,10 @@ def sum_list(lst: List[int]) -> int:
     Returns:
         the sum of the passed in list
     """
-    raise NotImplementedError("sum_list")
+    s = 0
+    for el in lst:
+        s += el
+    return s
 
 
 def mean(lst: List[int]) -> float:
@@ -140,6 +154,8 @@ if __name__ == "__main__":
         5,
     ], "every_other of [1,2,3,4,5] failed"
     assert sum_list([1, 2, 3]) == 6, "sum_list of [1,2,3] failed"
+    assert sum_list([1, 2, 3, 4]) == 10, "sum_list of [1,2,3,4] failed"
+    assert sum_list([]) == 0, "sum_list of [] failed"
     assert mean([1, 2, 3, 4, 5]) == 3, "mean of [1,2,3,4,5] failed"
     assert median([1, 2, 3, 4, 5]) == 3, "median of [1,2,3,4,5] failed"
 
