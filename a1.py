@@ -102,7 +102,14 @@ def mean(lst: List[int]) -> float:
     Returns:
         the mean of the passed in list
     """
-    raise NotImplementedError("mean")
+    # s = sum_list(lst)
+    # num_values = len(lst)
+    # if lst:
+    #     return s/num_values
+    # else:
+    #     return 0
+    return sum_list(lst) / len(lst) if lst else 0
+    
 
 
 def median(lst: List[int]) -> float:
@@ -117,7 +124,14 @@ def median(lst: List[int]) -> float:
     Returns:
         the median of the passed in list
     """
-    raise NotImplementedError("median")
+    if len(lst) % 2 == 1:
+        # print(len(lst)//2)
+        return lst[len(lst)//2]
+    else:
+        in1 = len(lst)//2
+        in2 = in1 - 1
+        # print(in1, in2)
+        return (lst[in1] + lst[in2]) / 2
 
 
 def duck_duck_goose(lst: List[str]) -> List[str]:
@@ -139,7 +153,25 @@ def duck_duck_goose(lst: List[str]) -> List[str]:
     Returns:
         the resulting list after playing duck duck goose
     """
-    raise NotImplementedError("duck_duck_goose")
+    i = 0
+    current = "duck1"
+    while len(lst) > 2:
+        if current == "duck1":
+            current = "duck2"
+            i += 1
+        elif current == "duck2":
+            current = "goose"
+            i += 1
+        else:
+            current = "duck1"
+            lst.pop(i)
+        
+        # wrap around if we get to the end
+        if i == len(lst):
+            i = 0
+        # alternate i %= len(lst)
+    
+    return lst
 
 
 # this line causes the nested code to be skipped if the file is imported instead of run
@@ -157,9 +189,14 @@ if __name__ == "__main__":
     assert sum_list([1, 2, 3, 4]) == 10, "sum_list of [1,2,3,4] failed"
     assert sum_list([]) == 0, "sum_list of [] failed"
     assert mean([1, 2, 3, 4, 5]) == 3, "mean of [1,2,3,4,5] failed"
+    assert mean([]) == 0, "mean of [] failed"
+    assert mean([1, 2, 3, 4, 5, 6]) == 3.5, "mean of [1,2,3,4,5,6] failed"
     assert median([1, 2, 3, 4, 5]) == 3, "median of [1,2,3,4,5] failed"
+    assert median([1, 2, 3, 4, 5, 6]) == 3.5, "median of [1,2,3,4,5] failed"
 
     names = ["roscoe", "kim", "woz", "solin", "law", "remess"]
     assert duck_duck_goose(names) == ["roscoe", "law"]
+    names = ["roscoe", "solin", "law", "remess"]
+    assert duck_duck_goose(names) == ["roscoe", "remess"]
 
     print("All tests passed!")
